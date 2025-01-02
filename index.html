@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <!DOCTYPE html>
+<html>
+<head>
+<title>Simplificador de Fracciones</title>
+</head>
+<body>
+  <main>
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-asterisk"><path d="M12 6v12"></path><path d="M17.196 9 6.804 15"></path><path d="m6.804 9 10.392 6"></path></svg>
+      <h1>Simplificador de Fracciones</h1>
+    </div>
+    <input type="text" id="fraccionInput" placeholder="Ingresa una fracción (ej. 12/18)">
+    <button onclick="simplificar()">Simplificar</button>
+    <p id="resultado"></p>
+  </main>
+
+  <script>
+    function simplificar() {
+      var fraccion = document.getElementById("fraccionInput").value;
+      var partes = fraccion.split("/");
+      if (partes.length !== 2) {
+        document.getElementById("resultado").innerHTML = "Fracción inválida.";
+        return;
+      }
+      var numerador = parseInt(partes[0]);
+      var denominador = parseInt(partes[1]);
+      if (isNaN(numerador) || isNaN(denominador) || denominador === 0) {
+        document.getElementById("resultado").innerHTML = "Fracción inválida.";
+        return;
+      }
+      var mcd = calcularMCD(numerador, denominador);
+      var numeradorSimplificado = numerador / mcd;
+      var denominadorSimplificado = denominador / mcd;
+      document.getElementById("resultado").innerHTML = numeradorSimplificado + "/" + denominadorSimplificado;
+    }
+
+    function calcularMCD(a, b) {
+      if (b === 0) {
+        return a;
+      }
+      return calcularMCD(b, a % b);
+    }
+  </script>
+</body>
+</html>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
